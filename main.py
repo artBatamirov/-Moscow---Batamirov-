@@ -1,21 +1,15 @@
 import sys
 from random import randint
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
+from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMainWindow
+from app import Circles
 
 
-class Circles(QWidget):
+class Project(QMainWindow, Circles):
     def __init__(self):
         super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        self.setGeometry(300, 300, 500, 500)
-        self.setWindowTitle('Git и желтые окружности')
-        self.btn = QPushButton('push', self)
-        self.btn.move(10, 10)
         self.isok = False
-        self.btn.clicked.connect(self.ok)
+        self.setupUI()
 
     def paintEvent(self, event):
         if self.isok:
@@ -30,14 +24,14 @@ class Circles(QWidget):
         self.update()
 
     def draw(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
-        qp.setPen(QColor(255, 255, 0))
+        r, g, b = randint(0, 255), randint(0, 255), randint(0, 255)
+        qp.setBrush(QColor(r, g, b))
         r = randint(0, 200)
         qp.drawEllipse(randint(0, 200), randint(0, 200), r, r)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Circles()
+    ex = Project()
     ex.show()
     sys.exit(app.exec())
