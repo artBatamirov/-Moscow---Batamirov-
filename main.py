@@ -36,7 +36,6 @@ class Circles(QWidget):
         qp.drawEllipse(randint(0, 200), randint(0, 200), r, r)
 
 
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Circles()
